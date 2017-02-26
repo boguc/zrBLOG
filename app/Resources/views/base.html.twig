@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bundles/app/bootstrap/css/bootstrap.css') }}" />
+        <script src="{{ asset('bundles/app/bootstrap/js/bootstrap.min.js') }}"></script>
         {% block stylesheets %}
-         {% endblock %}
+        {% endblock %}
         {% block javascripts %}
         {% endblock %}
     </head>
