@@ -20,7 +20,6 @@ class PostRepository extends EntityRepository
     
     public function getAllPublished()
     {
-        
         $query = $this->createQueryBuilder('p') 
                     ->leftJoin('p.user', 'u')
                     ->orderBy('p.createdAt', 'DESC')
@@ -29,6 +28,19 @@ class PostRepository extends EntityRepository
         return $query;
     }
     
+    public function getAllNotPublished()
+    {
+        $query = $this->createQueryBuilder('p')
+                    ->update()
+                    ->set('p.status',1)
+                    ->where('p.status = 3')
+                    ->andWhere('p.publish < :datenow')
+                    ->setParameter('datenow', new \DateTime('now'))
+                    ->getQuery();
+        $results = $query->execute();
+        
+        return $results;
+    }
     
         
 }
