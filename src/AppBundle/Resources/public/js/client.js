@@ -27,6 +27,8 @@ var $zrblog = $zrblog || {};
                     type: 'get',
                     url: 'comment/add',
                     data: $('#comment_form').serialize(),
+                 }).done(function(data){
+                     $('#comment-list').prepend( data.comment_html );
                  });
             });
         };

@@ -48,6 +48,7 @@ var $zrblog = $zrblog || {};
                 $('#appbundle_post_publish_date_day').val(null);
                 $('#appbundle_post_publish_date_hour').val(null);
                 $('#appbundle_post_publish_date_minute').val(null);
+                $("slect").children().removeAttr("selected");
             }
         };
 

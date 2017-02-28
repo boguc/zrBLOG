@@ -10,7 +10,7 @@ use AppBundle\Entity\Comment;
 class ClientController extends Controller
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="blog")
      */
     public function indexAction(Request $request)
     {
@@ -26,7 +26,8 @@ class ClientController extends Controller
             );
             
         return $this->render('client/index.html.twig', array(
-            'posts' => $pagination
+            'posts' => $pagination,
+            'menu' => 1
         ));
     }
     
@@ -39,10 +40,11 @@ class ClientController extends Controller
         $post = $em->getRepository('AppBundle:Post')
             ->findOneBy(array('id' => $id));
         $comments = $em->getRepository('AppBundle:Comment')
-            ->findBy(array('post' => $post));     
+            ->findBy(array('post' => $post),array('createdAt' => 'DESC'));     
         return $this->render('client/post_show.html.twig', array(
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            'menu' => 1
         ));
     }
 }

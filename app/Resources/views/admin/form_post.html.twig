@@ -5,10 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container" style="padding-top: 50px">
-        {{ form_start(form) }}
-            {{ form_widget(form) }}
-            <button type="submit" class="btn btn-primary pull-right">Publikuj</button>
-        {{ form_end(form) }}
-    </div>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary pull-right">Publikuj</button>
+    {{ form_end(form) }}
 {% endblock %}

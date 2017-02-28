@@ -1,40 +1,40 @@
 {% extends 'base.html.twig' %}
 {% block title %}Blog - Admin{% endblock %}
 {% block body %}
-    <div class="container" style="padding-top: 80px">
-        <div class="text-right">
-            <a href="admin/post/add" class="btn btn-primary btn-add-post" role="button">Dodaj artykuł</a>
+    <div class="row">
+        <div class="col-md-12 text-right btn-margin">
+        <a href="{{ url('add_post') }}" class="btn btn-primary btn-add-post" role="button">Dodaj artykuł</a>
         </div>
-        
-        <ul class="list-group">
-            {% for item in posts %}
-                <li class="list-group-item row">
-                    <div class="col-md-4">
-                        {{ item.title }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ item.createdAt|date("d-m-Y H:i:s") }}
-                    </div>
-                    <div class="col-md-3">
-                        {% if item.status == 1 %}
-                            Opublikowany
-                        {% elseif item.status == 2 %}
-                            Nieopublikowany
-                        {% elseif item.status == 3 %}
-                            Opóźniona publikacja
-                            {{ item.publish|date("d-m-Y H:i:s") }}
-                        {% endif %}
-                    </div>
-                    <div class="col-md-3 text-right">
-                            <a class="btn btn-success" href="">podgląd</a>
-                        {% if item.user == app.user %}
-                            <a class="btn btn-primary" href="admin/post/edit/{{ item.user.id }}">edytuj</a>
-                            <a class="btn btn-danger" href="admin/post/delete/{{ item.user.id }}">usuń</a>
-                        {% endif %}
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-        {{ knp_pagination_render(posts) }}
     </div>
+
+    <ul class="list-group">
+        {% for item in posts %}
+            <li class="list-group-item row">
+                <div class="col-md-4">
+                    {{ item.title }}
+                </div>
+                <div class="col-md-2">
+                    {{ item.createdAt|date("d-m-Y H:i:s") }}
+                </div>
+                <div class="col-md-3">
+                    {% if item.status == 1 %}
+                        Opublikowany
+                    {% elseif item.status == 2 %}
+                        Nieopublikowany
+                    {% elseif item.status == 3 %}
+                        Opóźniona publikacja
+                        {{ item.publish|date("d-m-Y H:i:s") }}
+                    {% endif %}
+                </div>
+                <div class="col-md-3 text-right">
+                        <a class="btn btn-success" href="{{ url('show_post', { 'id': item.id }) }}">podgląd</a>
+                    {% if item.user == app.user %}
+                        <a class="btn btn-primary" href="{{ url('edit_post', { 'id': item.id }) }}">edytuj</a>
+                        <a class="btn btn-danger" href="{{ url('delete_post', { 'id': item.id }) }}">usuń</a>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    {{ knp_pagination_render(posts) }}
 {% endblock %}

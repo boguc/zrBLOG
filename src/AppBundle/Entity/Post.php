@@ -60,13 +60,14 @@ class Post
      * @var user
      * 
      * @ORM\ManyToOne(targetEntity="User", inversedBy="post")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $user;
     
     /**
      * @var comment
      * 
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="post", cascade={"all"})
      */
     private $comment;
 

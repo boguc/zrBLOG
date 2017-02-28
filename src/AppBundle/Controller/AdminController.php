@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function indexAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->redirect('login');
+            return $this->redirectToRoute('login');
         }else{
             
             $em = $this->getDoctrine()->getManager();
@@ -31,7 +31,8 @@ class AdminController extends Controller
                 );
             
             return $this->render('admin/index.html.twig', array(
-                'posts' => $pagination
+                'posts' => $pagination,
+                'menu' => 2
             ));
         }
     }
@@ -42,7 +43,7 @@ class AdminController extends Controller
     public function newAction(Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->redirect('login');
+            return $this->redirectToRoute('login');
         }else{
             $user = $this->getUser();
             $post = new Post();
@@ -61,7 +62,8 @@ class AdminController extends Controller
             }
             
             return $this->render('admin/form_post.html.twig', array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'menu' => 2
             ));
         }
     }
@@ -72,7 +74,7 @@ class AdminController extends Controller
     public function editAction($id ,Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->redirect('login');
+            return $this->redirectToRoute('login');
         }else{
 
             $em = $this->getDoctrine()->getManager();
@@ -91,7 +93,8 @@ class AdminController extends Controller
             }
             
             return $this->render('admin/form_post.html.twig', array(
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'menu' => 2
             ));  
         }
     }
@@ -102,15 +105,17 @@ class AdminController extends Controller
     public function deleteAction($id ,Request $request)
     {
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN')) {
-            return $this->redirect('login');
+            return $this->redirectToRoute('login');
         }else{
 
             $em = $this->getDoctrine()->getManager();
             $post = $em->getRepository('AppBundle:Post')
                     ->findOneBy(array('id' => $id));
             
-            $post->delete();
+            $em->remove($post);
+            $em->flush();
             
+            return $this->redirectToRoute('admin');
         }
     }
 }

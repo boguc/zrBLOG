@@ -3,22 +3,21 @@
     <script src="{{ asset('bundles/app/js/client.js') }}"></script>
 {% endblock %}
 {% block body %}
-   
-    <div class="container" style="padding-top: 80px">
-        <div class="post-item">
-            <h2>{{ post.title }}</h2>
-            <div class="post-item-author">
-                {{ post.user.username }}
-            </div>
-            <div class="post-item-createdat">
-                {{ post.createdAt|date("d-m-Y H:i:s") }}
-            </div>
-            <div class="post-item-content">
-                {{ post.content }}
-            </div>
+    <div class="post-item">
+        <h2>{{ post.title }}</h2>
+        <div class="post-item-author">
+            {{ post.user.username }}
         </div>
-        <div class="comment-box">
-            <form id="comment_form">
+        <div class="post-item-createdat">
+            {{ post.createdAt|date("d-m-Y H:i:s") }}
+        </div>
+        <div class="post-item-content">
+            {{ post.content }}
+        </div>
+    </div>
+    <div class="comment-box row">
+        <form id="comment_form">
+            <div class="col-md-10 col-xs-12 col-sm-12 pull-right">
                 <div class="form-group">
                     <input type="text" required="required" class="form-control" name="author" id="comment_author" placeholder="Autor">
                 </div>
@@ -31,13 +30,19 @@
                 <div class="form-group hidden">
                     <input type="text" required="required" class="form-control" name="post_id" id="comment_post_id" placeholder="Treść" value="{{ post.id }}">
                 </div>
-                <div class="row"><button type="submit" class="btn btn-primary pull-right">Kommentuj</button></div>
-            </form>
-            <ul class="list-group comment-list">
+            </div>
+            <div class="col-md-10 col-xs-12 col-sm-12 pull-right">
+                <button type="submit" class="btn btn-primary pull-right btn-margin">Kommentuj</button>
+            </div>
+        </form>
+        <div class="col-md-10 col-xs-12 col-sm-12 pull-right">
+            <ul id="comment-list" class="list-group comment-list">
                 {% for comment in comments %}
                     {{ include('client/comment_item.html.twig', { 'comment': comment }) }}
                 {% endfor %}
             </ul>
         </div>
+    </div>
+
     </div>
 {% endblock %}
