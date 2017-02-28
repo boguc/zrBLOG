@@ -84,7 +84,6 @@ class AdminController extends Controller
             
             if ($form->isValid()){
                 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($post);
                 $em->flush();
                 

@@ -17,5 +17,18 @@ class PostRepository extends EntityRepository
          $dql = "SELECT post FROM AppBundle:Post post ORDER BY post.createdAt DESC";
         return $this->getEntityManager()->createQuery($dql);
     }
+    
+    public function getAllPublished()
+    {
+        
+        $query = $this->createQueryBuilder('p') 
+                    ->leftJoin('p.user', 'u')
+                    ->orderBy('p.createdAt', 'DESC')
+                    ->getQuery();
+        
+        return $query;
+    }
+    
+    
         
 }

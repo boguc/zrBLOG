@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Blog</h1>
+    
+    <div class="container" style="padding-top: 80px">
+        <ul class="list-group">
+            {% for item in posts %}
+                <li class="list-group-item post-item">
+                    <a href="{{ path('show_post', {'id': item.id}) }}"><h2>{{ item.title }}</h2></a>
+                    <div class="post-item-author">
+                        {{ item.user.username }}
+                    </div>
+                    <div class="post-item-createdat">
+                        {{ item.createdAt|date("d-m-Y H:i:s") }}
+                    </div>
+                    <div class="post-item-content-short">
+                        {{ item.content }}
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        {{ knp_pagination_render(posts) }}
+    </div>
+{% endblock %}

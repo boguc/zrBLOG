@@ -1,0 +1,16 @@
+<li class="comment-item list-group-item">
+    <div class="comment-item-author">
+        {{ comment.author }}
+    </div>
+        <div class="row">
+            <div class="comment-item-email col-md-6 col-sm-6 col-xs-12">
+                {{ comment.email }}
+            </div>
+            <div class="comment-item-createdat col-md-6 col-sm-6 col-xs-12 text-right">
+                {{ comment.createdAt|date("d-m-Y H:i:s") }}
+            </div>
+        </div>
+    <div class="comment-item-content">
+        {{ comment.content }}
+    </div>
+</li>
