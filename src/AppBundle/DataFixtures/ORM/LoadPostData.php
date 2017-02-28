@@ -23,7 +23,7 @@ class LoadPostData implements FixtureInterface {
             $post->setContent($faker->text(300));
             $post->setCreatedAt($faker->dateTimeThisMonth);
             $post->setStatus(1);
-            
+                        
             $manager->persist($post);
         }
         

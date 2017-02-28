@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    public function getQueryOrderedByCreatedAt()
+    {
+         $dql = "SELECT post FROM AppBundle:Post post ORDER BY post.createdAt DESC";
+        return $this->getEntityManager()->createQuery($dql);
+    }
+        
 }
