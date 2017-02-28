@@ -1,21 +1,14 @@
 {% extends 'base.html.twig' %}
 {% block title %}Blog - Admin{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('bundles/app/js/admin.js') }}"></script>
+{% endblock %}
+
 {% block body %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="pull-right">
-                {% if app.user %}
-                    Zalogowany jako <span class="user-name">{{ app.user }}</span> | <a href="{{ path('fos_user_security_logout') }}">wyloguj</a>
-                {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
     <div class="container" style="padding-top: 50px">
         {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit" class="btn btn-primary btn-block">Publikuj</button>
+            <button type="submit" class="btn btn-primary pull-right">Publikuj</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

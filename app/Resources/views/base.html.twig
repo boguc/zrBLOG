@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Strona Główna{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('bundles/app/bootstrap/css/bootstrap.css') }}" />
+        <script src="{{ asset('bundles/app/js/jquery-3.1.1.min.js') }}"></script>
         <script src="{{ asset('bundles/app/bootstrap/js/bootstrap.min.js') }}"></script>
         {% block stylesheets %}
         {% endblock %}
@@ -11,6 +12,17 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="pull-right">
+                    {% if app.user %}
+                        Zalogowany jako <span class="user-name">{{ app.user }}</span> | <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
+                    {% else %}
+                        <a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
         {% block body %}{% endblock %}
     </body>
 </html>

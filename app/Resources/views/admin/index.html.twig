@@ -1,17 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Blog - Admin{% endblock %}
 {% block body %}
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="pull-right">
-                {% if app.user %}
-                    Zalogowany jako <span class="user-name">{{ app.user }}</span> | <a href="{{ path('fos_user_security_logout') }}">Wyloguj</a>
-                {% else %}
-                    <a href="{{ path('fos_user_security_login') }}">Zaloguj się</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
     <div class="container" style="padding-top: 80px">
         <div class="text-right">
             <a href="admin/post/add" class="btn btn-primary" role="button">Dodaj artykuł</a>
@@ -31,14 +20,14 @@
                             Opublikowany
                         {% elseif item.status == 2 %}
                             Nieopublikowany
-                        {% else %}
+                        {% elseif item.status == 3 %}
                             Opóźniona publikacja
                             {{ item.publish|date("d-m-Y H:i:s") }}
                         {% endif %}
                     </div>
-                    <div class="col-md-3">
-                        {% if item.user == app.user %}
+                    <div class="col-md-3 text-right">
                             <a class="btn btn-success" href="">podgląd</a>
+                        {% if item.user == app.user %}
                             <a class="btn btn-primary" href="admin/post/edit/{{ item.user.id }}">edytuj</a>
                             <a class="btn btn-danger" href="admin/post/delete/{{ item.user.id }}">usuń</a>
                         {% endif %}
